@@ -17,6 +17,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 let users = [];
 let results = [];
+let stats = [];
 const placedShips = [];
 
 io.on('connection', (socket) => {
@@ -46,9 +47,13 @@ io.on('connection', (socket) => {
     if (foundShip) {
       const hitter = { color: colorChangeInfo.user.color };
       const hittee = { color: foundShip.user.color };
-      const result = { hitter, hittee };
-      results.push(result);
+      const hitStats = { hitter, hittee };
+      stats.push(hitStats);
+      console.log(hitStats);
+      results.push(foundShip.user)
       console.log(results);
+      io.emit('stats', hitStats);
+      io.emit('result', results);
       io.emit('ship-hit', foundShip);
       socket.emit('hitter', {hit: true})
     }
