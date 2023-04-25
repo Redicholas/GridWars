@@ -26,7 +26,7 @@ const filterColorOptions = () => {
   }
 }
 
-export const usersSocket = io('http://localhost:3000')
+export const usersSocket = io('https://starfish-app-nyg5b.ondigitalocean.app/:3000')
 
 usersSocket.on('create-user', (users: User[]) => {
   usersState.users = []
