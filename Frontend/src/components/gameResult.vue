@@ -21,7 +21,7 @@ const props = defineProps({
 <style scoped lang="scss">
 .result-info-container {
     margin-bottom: 10px;
-    width: 25%;
+    width: 100%;
     height: 100%;
     padding: 0.2rem;
     h3 {

@@ -28,6 +28,7 @@
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    gap: 75px;
   }
 
   .main-container {
