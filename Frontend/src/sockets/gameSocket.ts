@@ -21,7 +21,7 @@ export const gameState = reactive<IGameState>({
   gameStarted: false,
 })
 
-export const gameSocket = io('http://localhost:3000');
+export const gameSocket = io('https://starfish-app-nyg5b.ondigitalocean.app/:3000');
 
 gameSocket.on('color-change', (colorInfo: ColorChangeEmitBody) => {
   gameState.latestColorChange = colorInfo;

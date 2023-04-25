@@ -6,7 +6,7 @@ export const resultState = reactive({
   users: [] as User[],
 })
 
-export const resultSocket = io('http://localhost:3000')
+export const resultSocket = io('https://starfish-app-nyg5b.ondigitalocean.app/:3000')
 
 resultSocket.on('result', (users: User[]) => {
   resultState.users = []

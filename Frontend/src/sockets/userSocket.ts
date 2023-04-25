@@ -6,7 +6,7 @@ export const userState = reactive({
     user: [] as User[]
   })
   
-  export const userSocket = io('http://localhost:3000');
+  export const userSocket = io('https://starfish-app-nyg5b.ondigitalocean.app/:3000');
   
   userSocket.on('create-user', (user: User) => {
     //userState.user = []; // behövde kommentera bort denna

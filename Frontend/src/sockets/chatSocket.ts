@@ -7,7 +7,7 @@ export const chatState = reactive({
   chatMessages: [] as ChatMessage[]
 })
 
-export const chatSocket = io('http://localhost:3000');
+export const chatSocket = io('https://starfish-app-nyg5b.ondigitalocean.app/:3000');
 
 chatSocket.on('chat', (message: ChatMessage) => {
   console.log('Mottaget message');
