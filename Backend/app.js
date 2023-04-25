@@ -24,6 +24,7 @@ io.on('connection', (socket) => {
   console.log('user connected: ' + socket.id);
   io.emit('create-user', users);
   io.emit('result', results);
+  io.emit('stats', stats);
 
   socket.on('create-user', (user) => {
     users.push(user);
@@ -47,15 +48,15 @@ io.on('connection', (socket) => {
     if (foundShip) {
       const hitter = { color: colorChangeInfo.user.color };
       const hittee = { color: foundShip.user.color };
-      const hitStats = { hitter, hittee };
+      const hitStats =  { hit: hitter.color, hitted: hittee.color };
       stats.push(hitStats);
       console.log(hitStats);
       results.push(foundShip.user)
       console.log(results);
-      io.emit('stats', hitStats);
       io.emit('result', results);
       io.emit('ship-hit', foundShip);
       socket.emit('hitter', {hit: true})
+      io.emit('stats', stats);
     }
   });
 

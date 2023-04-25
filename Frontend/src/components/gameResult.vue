@@ -13,7 +13,7 @@ const props = defineProps({
    playerName: String,
    playerColor: String,
    playerId: String,
-   playerPlace: String
+   playerPlace: Number
 })
 
 </script>
