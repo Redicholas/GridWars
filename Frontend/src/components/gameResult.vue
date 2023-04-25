@@ -1,7 +1,7 @@
 <template>
     <div class="result-info-container">
         <h3>Nr. {{props.playerPlace}}</h3>
-        <h5 class="player-name">{{ props.playerName}}</h5>
+        <h3 class="player-name">{{ props.playerName}}</h3>
         <p class="player-color">{{ props.playerColor}}</p>
     </div>
 
@@ -32,7 +32,7 @@ const props = defineProps({
     }
 }
 .player-color {
-    background-color: red;
+    background-color: v-bind(playerColor);
     width: 100%;
     height: 10vh;
     text-align: center;
