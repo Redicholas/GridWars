@@ -1,7 +1,7 @@
 <template>
     <div class="result-info-container">
         <h3>Nr. {{props.playerPlace}}</h3>
-        <h5 class="player-name">{{ props.playerName}}</h5>
+        <h3 class="player-name">{{ props.playerName}}</h3>
         <p class="player-color">{{ props.playerColor}}</p>
     </div>
 
@@ -13,7 +13,7 @@ const props = defineProps({
    playerName: String,
    playerColor: String,
    playerId: String,
-   playerPlace: String
+   playerPlace: Number
 })
 
 </script>
@@ -21,7 +21,7 @@ const props = defineProps({
 <style scoped lang="scss">
 .result-info-container {
     margin-bottom: 10px;
-    width: 25%;
+    width: 100%;
     height: 100%;
     padding: 0.2rem;
     h3 {
@@ -32,7 +32,7 @@ const props = defineProps({
     }
 }
 .player-color {
-    background-color: red;
+    background-color: v-bind(playerColor);
     width: 100%;
     height: 10vh;
     text-align: center;
