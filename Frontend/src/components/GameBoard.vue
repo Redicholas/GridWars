@@ -1,14 +1,13 @@
 <template>
-  <div class="grid" @mousedown="() => (mouseDown = true)" @mouseup="() => (mouseDown = false)">
+  <div class="grid">
     <div v-for="(n, y) in boardSize.rows" :key="y" class="row">
       <span
         v-for="(v, x) in boardSize.columns"
         :key="x"
         class="cell"
-        @mousedown="() => changeColor(y, x)"
-        @mouseover="() => mouseDown && changeColor(y, x)"
+        @click="() => changeColor(y, x)"
         :ref="(el) => {cells[y][x] = el as HTMLSpanElement}"
-      >
+        >
       </span>
     </div>
     <button class='resetbtn' @click="() => gameSocket.emit('game-reset')">Reset</button>
@@ -24,7 +23,6 @@ import create2dArrays from '../helpers/create2dArrays'
 
 const user = useUserStore().$state.user[0]
 
-const mouseDown = ref(false) // För att fylla i cellerna om man håller ned musknappen
 const boardSize = ref({ rows: 15, columns: 20 }) // Bestämmer hur många rader och kolumner som ska renderas i <template>
 
 watch(() => gameState.latestColorChange, () => {
