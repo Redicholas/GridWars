@@ -7,7 +7,7 @@
         :key="x"
         class="cell"
         @click="() => placeShip(y, x)"
-        :ref="(el) => {cells[y][x] = el as HTMLSpanElement}"
+        :ref="(el: any) => {cells[y][x] = el as HTMLSpanElement}"
       >
       </span>
     </div>
@@ -20,7 +20,8 @@
 import create2dArrays from '@/helpers/create2dArrays'
 import { useUserStore } from '@/stores/userStore'
 import { ref } from 'vue'
-import { gameSocket } from '../sockets/gameSocket'
+// import { gameSocket } from '../sockets/gameSocket'
+import { socket } from '@/socket'
 
 const user = useUserStore().$state.user[0]
 
@@ -30,20 +31,24 @@ const cells = ref(create2dArrays(boardSize.value.rows))
 
 const placed = ref(false)
 
-const shipCoordinates = ref<{y: null | number, x: null | number}>({ y: null, x: null })
+const shipCoordinates = ref<{ y: null | number; x: null | number }>({ y: null, x: null })
 
 const placeShip = (y: number, x: number) => {
   if (!placed.value) {
     cells.value[y][x].style.backgroundColor = user.color
     shipCoordinates.value.y = y
     shipCoordinates.value.x = x
+
   }
 }
 
 const sendCoordinates = () => {
   const { y, x } = shipCoordinates.value
-  gameSocket.emit('ship-placement', { y, x, user })
+
   placed.value = true;
+
+  socket.emit('ship-placement', { y, x, user })
+
 }
 </script>
 

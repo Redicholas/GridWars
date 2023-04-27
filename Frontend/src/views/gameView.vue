@@ -32,11 +32,11 @@ import PlayerInfo from '../components/PlayerInfo.vue'
 import gameResult from '@/components/gameResult.vue'
 import gameStats from '@/components/gameStats.vue'
 import { usersState } from '@/sockets/usersSocket'
-import { resultSocket } from '@/sockets/resultSocket'
 import ShipPlacement from '@/components/ShipPlacement.vue'
 import { gameState } from '../sockets/gameSocket'
 import { resultState } from '@/sockets/resultSocket'
 import { statsState } from '@/sockets/resultSocket'
+import { socket } from '@/socket'
 
 </script>
 
