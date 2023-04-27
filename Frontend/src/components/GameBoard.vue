@@ -7,48 +7,54 @@
         class="cell"
         @click="() => changeColor(y, x)"
         :ref="(el) => {cells[y][x] = el as HTMLSpanElement}"
-        >
+      >
       </span>
     </div>
-    <button class='resetbtn' @click="() => gameSocket.emit('game-reset')">Reset</button>
+    <button class="resetbtn" @click="() => socket.emit('game-reset')">Reset</button>
   </div>
 </template>
 
 <script setup lang="ts">
 import { ref, type ComponentPublicInstance, watch } from 'vue'
-import { gameSocket, gameState } from '../sockets/gameSocket'
+import { gameState } from '../sockets/gameSocket'
 import { useUserStore } from '@/stores/userStore'
 import ColorChangeEmitBody from '@/models/ColorChangeEmitBody'
 import create2dArrays from '../helpers/create2dArrays'
+import { socket } from '@/socket'
 
 const user = useUserStore().$state.user[0]
 
 const boardSize = ref({ rows: 15, columns: 20 }) // Bestämmer hur många rader och kolumner som ska renderas i <template>
 
-watch(() => gameState.latestColorChange, () => {
-  // Ändrar cellens färg när det kommer in en emit, gameState ligger i gameSocket.ts
-  if (gameState.latestColorChange) {
+watch(
+  () => gameState.latestColorChange,
+  () => {
+    // Ändrar cellens färg när det kommer in en emit, gameState ligger i gameSocket.ts
+    if (gameState.latestColorChange) {
+      const {
+        latestColorChange: { y, x, user }
+      } = gameState
+      cells.value[y][x].style.backgroundColor = user.color
+    }
+  }
+)
 
-    const {
-    latestColorChange: { y, x, user }
-  } = gameState
-  cells.value[y][x].style.backgroundColor = user.color
-}
-})
-
-watch(() => gameState.reset, () => {
-  cells.value.forEach((row) => {
-    row.forEach((cell) => {
-      cell.style.backgroundColor = 'white'
+watch(
+  () => gameState.reset,
+  () => {
+    cells.value.forEach((row) => {
+      row.forEach((cell) => {
+        cell.style.backgroundColor = 'white'
+      })
     })
-  })
-  gameState.reset = false;
-})
+    gameState.reset = false
+  }
+)
 
 const cells = ref(create2dArrays(boardSize.value.rows))
 
 const changeColor = (y: number, x: number) => {
-  gameSocket.emit('color-change', new ColorChangeEmitBody(y, x, user))
+  socket.emit('color-change', new ColorChangeEmitBody(y, x, user))
 }
 </script>
 

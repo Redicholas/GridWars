@@ -7,24 +7,25 @@
           :class="message.userId === loggedInUser ? 'my-message' : 'other-message'"
           :style="{ backgroundColor: message.userColor }"
           :key="i"
-          >
+        >
           {{ message.username + ': ' + message.messageBody }}
         </li>
       </ul>
     </div>
-      <div class="chat-input-container">
-        <input class="chat-input" ref="input" id="inputText" type="text" />
-        <button class="chat-input-btn" @click="sendMessage">Send</button>
-      </div>
+    <div class="chat-input-container">
+      <input class="chat-input" ref="input" id="inputText" type="text" />
+      <button class="chat-input-btn" @click="sendMessage">Send</button>
+    </div>
   </section>
 </template>
 
 <script setup lang="ts">
 import ChatMessage from '@/models/ChatMessage'
-import { chatSocket } from '@/sockets/chatSocket'
+// import { chatSocket } from '@/sockets/chatSocket'
 import { chatState } from '@/sockets/chatSocket'
 import { ref } from 'vue'
 import { useUserStore } from '@/stores/userStore'
+import { socket } from '@/socket'
 
 const store = useUserStore()
 
@@ -33,19 +34,17 @@ const loggedInUser = localStorage.getItem('userId') || 'null'
 
 const input = ref<HTMLInputElement | null>(null)
 
-
 function sendMessage() {
   const name = store.user[0].name
   const id = store.user[0].id
   const color = store.user[0].color
   const newMessage = new ChatMessage(name, color, id, input.value?.value as string) // Update to get "username" and "userId" from localStorage
 
-  chatSocket.emit('chat', newMessage)
+  socket.emit('chat', newMessage)
 }
 </script>
 
 <style scoped lang="scss">
-
 .chat-container {
   display: flex;
   flex-direction: column;
@@ -61,12 +60,11 @@ function sendMessage() {
 .chat-input-container {
   height: 5vh;
   display: flex;
-  input[type="text"] {
+  input[type='text'] {
     width: 100%;
     height: 100%;
   }
 }
-
 
 ul {
   padding: 1rem;

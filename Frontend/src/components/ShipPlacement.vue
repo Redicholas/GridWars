@@ -19,7 +19,8 @@
 import create2dArrays from '@/helpers/create2dArrays'
 import { useUserStore } from '@/stores/userStore'
 import { ref } from 'vue'
-import { gameSocket } from '../sockets/gameSocket'
+// import { gameSocket } from '../sockets/gameSocket'
+import { socket } from '@/socket'
 
 const user = useUserStore().$state.user[0]
 
@@ -29,20 +30,20 @@ const cells = ref(create2dArrays(boardSize.value.rows))
 
 const placed = ref(false)
 
-const shipCoordinates = ref<{y: null | number, x: null | number}>({ y: null, x: null })
+const shipCoordinates = ref<{ y: null | number; x: null | number }>({ y: null, x: null })
 
 const placeShip = (y: number, x: number) => {
   if (!placed.value) {
     cells.value[y][x].style.backgroundColor = user.color
     shipCoordinates.value.y = y
     shipCoordinates.value.x = x
-    placed.value = true;
+    placed.value = true
   }
 }
 
 const sendCoordinates = () => {
   const { y, x } = shipCoordinates.value
-  gameSocket.emit('ship-placement', { y, x, user })
+  socket.emit('ship-placement', { y, x, user })
 }
 </script>
 
