@@ -48,14 +48,14 @@ io.on('connection', (socket) => {
     if (foundShip) {
       const hitter = { color: colorChangeInfo.user.color };
       const hittee = { color: foundShip.user.color };
-      const hitStats =  { hit: hitter.color, hitted: hittee.color };
+      const hitStats = { hit: hitter.color, hitted: hittee.color };
       stats.push(hitStats);
       console.log(hitStats);
       results.push(foundShip.user)
       console.log(results);
       io.emit('result', results);
       io.emit('ship-hit', foundShip);
-      socket.emit('hitter', {hit: true})
+      socket.emit('hitter', { hit: true })
       io.emit('stats', stats);
     }
   });
@@ -78,6 +78,24 @@ io.on('connection', (socket) => {
       io.emit('start-game', { gameStarted: true });
     }
   });
+  socket.on('clear-everything', () => {
+
+    users = [];
+
+    results = [];
+
+    placedShips = [];
+
+    console.log('Reset');
+
+    console.log('users: ', users);
+
+    console.log('placedShips: ', placedShips);
+
+    console.log('results: ', results);
+
+  });
+
 });
 
 module.exports = { app: app, server: server };

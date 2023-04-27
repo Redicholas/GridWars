@@ -18,3 +18,5 @@
 // Denna har refaktorerats om, se usersSocket.ts
 
 console.log('Denna har refaktorerats')
+
+export {}

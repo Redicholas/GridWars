@@ -6,7 +6,7 @@
         :key="x"
         class="cell"
         @click="() => changeColor(y, x)"
-        :ref="(el) => {cells[y][x] = el as HTMLSpanElement}"
+        :ref="(el: any) => {cells[y][x] = el as HTMLSpanElement}"
       >
       </span>
     </div>
@@ -15,7 +15,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref, type ComponentPublicInstance, watch } from 'vue'
+import { ref, watch } from 'vue'
 import { gameState } from '../sockets/gameSocket'
 import { useUserStore } from '@/stores/userStore'
 import ColorChangeEmitBody from '@/models/ColorChangeEmitBody'

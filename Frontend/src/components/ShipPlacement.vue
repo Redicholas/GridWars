@@ -7,7 +7,7 @@
         :key="x"
         class="cell"
         @click="() => placeShip(y, x)"
-        :ref="(el) => {cells[y][x] = el as HTMLSpanElement}"
+        :ref="(el: any) => {cells[y][x] = el as HTMLSpanElement}"
       >
       </span>
     </div>
