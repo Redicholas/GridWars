@@ -18,7 +18,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 let users = [];
 let results = [];
 let stats = [];
-const placedShips = [];
+let placedShips = [];
 
 io.on('connection', (socket) => {
   console.log('user connected: ' + socket.id);
