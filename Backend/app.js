@@ -86,6 +86,8 @@ io.on('connection', (socket) => {
 
     placedShips = [];
 
+    stats = [];
+
     console.log('Reset');
 
     console.log('users: ', users);
