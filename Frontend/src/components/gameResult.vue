@@ -2,7 +2,7 @@
     <div class="result-info-container">
         <h3>Nr. {{props.playerPlace}}</h3>
         <h3 class="player-name">{{ props.playerName}}</h3>
-        <p class="player-color">{{ props.playerColor}}</p>
+        <p class="player-color"></p>
     </div>
 
 </template>
@@ -20,6 +20,8 @@ const props = defineProps({
 
 <style scoped lang="scss">
 .result-info-container {
+    display: flex;
+    flex-direction: column;
     margin-bottom: 10px;
     width: 100%;
     height: 100%;
@@ -34,7 +36,7 @@ const props = defineProps({
 .player-color {
     background-color: v-bind(playerColor);
     width: 100%;
-    height: 10vh;
+    height: 30px;
     text-align: center;
 }
 

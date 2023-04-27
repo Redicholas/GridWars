@@ -1,8 +1,8 @@
 <template>
-    <div class="result-info-container">
-        <h3 class="hitter-color" :style="{ backgroundColor: props.hitterColor }">{{ props.hitterColor}}</h3>
+    <div class="stats-info-container">
+        <h3 class="hitter-color" :style="{ backgroundColor: props.hitterColor }"></h3>
         <h5>Killed</h5>
-        <h3 class="hittee-color" :style="{ backgroundColor: props.hitteeColor }">{{ props.hitteeColor}}</h3>
+        <h3 class="hittee-color" :style="{ backgroundColor: props.hitteeColor }"></h3>
     </div>
 
 </template>
@@ -17,12 +17,14 @@ const props = defineProps({
 </script>
 
 <style scoped lang="scss">
-.result-info-container {
-    margin-bottom: 10px;
+.stats-info-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
     width: 100%;
     height: 100%;
-    padding: 0.2rem;
     h3 {
+        width: 100px;
         text-align: center;
     }
     h5 {

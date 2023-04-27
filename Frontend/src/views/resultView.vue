@@ -1,8 +1,8 @@
 <template>
     <main class="container-container">
-      <div class="main-container">
-        <h1 class="heading">Result</h1>
+      <div class="main-container result-container">
         <gameResult class="main-container" v-for="(user, i) in resultState.users" :key="i" :player-place="usersState.users.length-i" :player-color="user.color" :player-name="user.name"/> 
+        <h1 class="heading">Result</h1>
       </div>
       <div class="main-container">
         <h1 class="heading">Stats</h1>
@@ -43,4 +43,10 @@
     font-size: 3rem;
     margin-bottom: 2rem;
   }
+
+  .result-container {
+  height: 65vh;
+  display: flex;
+  flex-direction: column-reverse;
+}
 </style>
