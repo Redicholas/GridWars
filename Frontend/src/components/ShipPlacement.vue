@@ -11,7 +11,8 @@
       >
       </span>
     </div>
-    <button @click="sendCoordinates">Place ship</button>
+    <p v-if="placed">Your ship is placed, awaiting opponents</p>
+    <button v-else @click="sendCoordinates">Place ship</button>
   </div>
 </template>
 
@@ -36,13 +37,13 @@ const placeShip = (y: number, x: number) => {
     cells.value[y][x].style.backgroundColor = user.color
     shipCoordinates.value.y = y
     shipCoordinates.value.x = x
-    placed.value = true;
   }
 }
 
 const sendCoordinates = () => {
   const { y, x } = shipCoordinates.value
   gameSocket.emit('ship-placement', { y, x, user })
+  placed.value = true;
 }
 </script>
 
