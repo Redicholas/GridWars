@@ -24,12 +24,13 @@ If the live server is down you may demo this app, just follow these steps:
 - type `npm install` in your terminal followed by:
 - `nodemon start`
 
-Now the server should be up and running!
+Now the server should be up and running! Default port for the server: 3000
 
 4. <b>Frontend</b>
 
 - cd in to frontend folder.
-- type `npm install` in your terminal followed by:
+- type `npm install` in your terminal.
+- open `Frontend/src/socket.ts` and change `const URL` to your localhost.
 - `npm run dev`
 
 Now you should be given a url in your terminal, `ctrl` + `left click` on that url to open in browser.
